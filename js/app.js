@@ -160,7 +160,11 @@ sendTokenCliente = function(email){
 
 authUser = function(){
 	loading('show');
-	$.post("setUserAuth.php", $("#login").serialize(),
+
+	var user  = $('#user').val();
+	var senha = CryptoJS.SHA256($('#senha').val()).toString();
+
+	$.post("setUserAuth.php", {user:user, senha:senha},
 		function(data){
 			loading('hide');
 			if (data==1){
@@ -178,7 +182,11 @@ authUser = function(){
 
 authClient = function(){	
 	loading('show');
-	$.post("setClientAuth.php", $("#acesso").serialize(),
+
+	var user  = $('#user').val();
+	var senha = CryptoJS.SHA256($('#senha').val()).toString();
+	
+	$.post("setClientAuth.php", {user:user, senha:senha},
 		function(data){
 			loading('hide');
 			if (data==1){
@@ -195,7 +203,12 @@ authClient = function(){
 
 setNovaSenha = function(){
 	loading('show');
-	$.post("setUserPass.php", $("#newdatauser").serialize(),
+
+	var email  = $('#email').val();
+	var senha = CryptoJS.SHA256($('#senha').val()).toString();
+	var token = $('#token').val();
+
+	$.post("setUserPass.php", {email:email, senha:senha, token:token},
 		function(data){
 			loading('hide');
 			if (data==1){
@@ -217,7 +230,12 @@ setNovaSenha = function(){
 
 setClientNovaSenha = function(){
 	loading('show');
-	$.post("setClientPass.php", $("#newdatauser").serialize(),
+
+	var email  = $('#email').val();
+	var senha = CryptoJS.SHA256($('#senha').val()).toString();
+	var token = $('#token').val();
+
+	$.post("setClientPass.php", {email:email, senha:senha, token:token},
 		function(data){
 			loading('hide');
 			console.log(data);

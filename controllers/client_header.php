@@ -123,6 +123,9 @@ $js = '
 <script src="plugins/datatables/jquery.dataTables.js"></script>
 <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
 
+<!-- CryptoJS -->
+<script src="plugins/cryptojs_v3.1.2/rollups/sha256.js"></script>
+
 ';
 
 $jsFooter = '
