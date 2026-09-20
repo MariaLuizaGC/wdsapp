@@ -1,0 +1,40 @@
+<IfModule mod_rewrite.c>
+
+RewriteEngine On
+RewriteBase /wdsapp/
+
+RewriteRule ^login\/?$  login.php [NC,L]
+
+RewriteRule ^usuario/pass/token/([a-z0-9-]+)\/?$  user_pass.php?token=$1 [NC,L]
+RewriteRule ^usuario/novasenha\/?$  user_forgot_pass.php [NC,L]
+RewriteRule ^usuarios/novo\/?$  users_add.php [NC,L]
+RewriteRule ^usuarios/edit\/?$  users.php [NC,L]
+RewriteRule ^usuarios\/?$  users.php [NC,L]
+RewriteRule ^usuarios/edit/(.*)\/?$  users_edit.php?item=$1 [NC,L]
+
+RewriteRule ^acesso\/?$  client_login.php [NC,L]
+RewriteRule ^acesso/novasenha\/?$  client_forgot_pass.php [NC,L]
+RewriteRule ^acesso/token/([a-z0-9-]+)\/?$  client_pass.php?token=$1 [NC,L]
+RewriteRule ^painel\/?$  client_orders.php [NC,L]
+RewriteRule ^painel/(.*)\/?$  client_order.php?item=$1 [NC,L]
+
+RewriteRule ^clientes\/?$  clients.php [NC,L]
+RewriteRule ^cliente/edit\/?$  clients.php [NC,L]
+RewriteRule ^cliente/edit/(.*)\/?$  client_edit.php?item=$1 [NC,L]
+RewriteRule ^cliente/novo\/?$  client_new.php [NC,L]
+
+RewriteRule ^produtos\/?$  index.php [NC,L]
+RewriteRule ^produto/edit\/?$  index.php [NC,L]
+RewriteRule ^produto/edit/(.*)\/?$  product_edit.php?item=$1 [NC,L]
+RewriteRule ^produto/novo\/?$  product_new.php [NC,L]
+
+RewriteRule ^pedidos\/?$  orders.php [NC,L]
+RewriteRule ^pedidos/(.*)\/?$  orders.php?status=$1 [NC,L]
+RewriteRule ^pedido/novo\/?$  order_new.php [NC,L]
+RewriteRule ^pedido\/?$  orders.php [NC,L]
+RewriteRule ^pedido/(.*)\/?$  order.php?item=$1 [NC,L]
+RewriteRule ^pedido/(.*)\/?$  order.php?item=$1   [NC,L]
+
+RewriteRule ^comissoes\/?$  sellers_fee.php [NC,L]
+
+</IfModule>

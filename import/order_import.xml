@@ -1,0 +1,17 @@
+<?xml version="1.0"  encoding="UTF-8"?>
+<main>
+    <order>
+        <produto>
+            <id>5</id>
+            <quantidade>2</quantidade>
+        </produto>
+        <produto>
+            <id>20</id>
+            <quantidade>3</quantidade>
+        </produto>
+        <produto>
+            <id>14</id>
+            <quantidade>4</quantidade>
+        </produto>
+    </order>
+</main>

@@ -1,0 +1,22 @@
+User-agent: *
+Disallow: /login
+Disallow: /usuario
+Disallow: /usuarios
+Disallow: /clientes
+Disallow: /cliente
+Disallow: /produtos
+Disallow: /produto
+Disallow: /pedidos
+Disallow: /pedido
+Disallow: /comissoes
+Disallow: /acesso
+Disallow: /painel
+
+Disallow: /config
+Disallow: /controllers
+Disallow: /css
+Disallow: /dist
+Disallow: /css
+Disallow: /imgs
+Disallow: /js
+Disallow: /plugins
