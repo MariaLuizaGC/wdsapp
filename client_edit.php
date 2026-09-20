@@ -163,20 +163,6 @@ $session->setSession('pagina','clientes');
                                       </div>
                                   </div>
                               </div>
-                              <!--
-                              <div class="form-row">
-                                  <div class="form-group col-sm-12 ">
-                                      <label for="email" aria-label="E-mail">Password*</label>
-                                      <div class="input-group ">
-                                          <div class="input-group-prepend">
-                                              <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                                          </div>
-                                          <input type="password" class="form-control " id="password" name="password" placeholder="Senha" value="<?php echo $password; ?>" >
-                                      </div>
-                                  </div>
-                              </div>
-                              -->
-
                           </div>
                           <div class="col-sm-1 d-none d-sm-none d-md-none d-lg-block"></div>
                           <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
