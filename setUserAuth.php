@@ -13,7 +13,9 @@ $session->setSession('user_WDSApp_session', $user);
 
 $user_data = $functions->authUser($user , $password);
 
-if($user_data != ''){
+if($user_data["return"] == true){
+    $user_data = $user_data["data"];
+
     $session->setSession('id_user_WDSApp_session', $user_data["id"]);
     $session->setSession('nome_user_WDSApp_session', $user_data["user"]);
 
@@ -22,5 +24,5 @@ if($user_data != ''){
     echo '1';
 
 } else {
-    echo ("Email ou senha incorretos");
+    echo $user_data["message"];
 }

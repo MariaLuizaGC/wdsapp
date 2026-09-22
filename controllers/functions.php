@@ -76,26 +76,68 @@ class functions extends connect{
 		$result = $conn->fetch_array($query);
 
 		if($result){
-			$salt = functions::search("hashu","ref",$result["id"]);
-			if($salt){
-				$passwordHashed = hash('sha256',md5($salt["hash"] . $password));
 
-				if($passwordHashed == $result["senha"]){
-					return $result;
-				}else{
-					return false;
+			$login_attempts = 0;
+			$time_block = 0;
+
+			if($result["login_time_block"] > time()){
+				$time_block = $result["login_time_block"];
+				$minutes_block = ($time_block - time()) / 60;
+				$minutes_block = str_replace(",", ".", $minutes_block);
+				$minutes_block = ceil($minutes_block);
+
+				$return = [
+					"return" => false,
+					"message" => "Múltiplas tentativas de acesso detectadas. Tente novamente após ".$minutes_block." minuto(s)."
+				];
+			}
+			else{
+				$salt = functions::search("hashu","ref",$result["id"]);
+				if($salt){
+					$passwordHashed = hash('sha256',md5($salt["hash"] . $password));
+	
+					if($passwordHashed == $result["senha"]){						
+						$return = [
+							"return" => true,
+							"data" => $result
+						];	
+					}else{
+
+						$login_attempts = $result["login_attempts"];
+						$login_attempts++;
+
+						if($login_attempts >= 5){
+							$time_block = time() + 180;
+						}
+
+						$return = [
+							"return" => false,
+							"message" => "E-mail ou senha incorretos."
+						];						
+					}
+				}
+				else
+				{
+					$return = [
+						"return" => false,
+						"message" => "E-mail ou senha incorretos."
+					];
 				}
 			}
-			else
-			{
-				return false;
-			}
+
+			$qry = "UPDATE users SET login_attempts = ".$login_attempts.", login_time_block = ".$time_block." WHERE id = ".$result["id"];
+			$model = new model();
+			$rsExec = $model->model_exec($qry);
 		}
 		else
 		{
-			return false;
-		}	
-	
+			$return = [
+						"return" => false,
+						"message" => "E-mail ou senha incorretos."
+					];
+		}
+
+		return $return;
 	}
 
 	function clientAuth($user, $password){
