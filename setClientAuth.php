@@ -13,12 +13,15 @@ $session->setSession('client_WDSApp_session', $user);
 
 $user_data = $functions->clientAuth($user , $password);
 
-if($user_data != ''){
+if($user_data["return"] == true){
+    $user_data = $user_data["data"];
+
     $session->setSession('id_client_WDSApp_session', $user_data["id"]);
     $session->setSession('nome_client_WDSApp_session', $user_data["nome"]);
+    session_regenerate_id(true);
 
     echo 1;
 
 } else {
-    echo ("Email ou senha incorretos");
+    echo $user_data["message"];
 }

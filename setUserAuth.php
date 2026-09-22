@@ -18,8 +18,8 @@ if($user_data["return"] == true){
 
     $session->setSession('id_user_WDSApp_session', $user_data["id"]);
     $session->setSession('nome_user_WDSApp_session', $user_data["user"]);
-
     date_default_timezone_set('America/Sao_Paulo');
+    session_regenerate_id(true);
 
     echo '1';
 
