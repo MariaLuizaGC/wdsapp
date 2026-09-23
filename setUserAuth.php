@@ -21,7 +21,7 @@ if($user_data["return"] == true){
     date_default_timezone_set('America/Sao_Paulo');
     session_regenerate_id(true);
 
-    echo '1';
+    echo 1;
 
 } else {
     echo $user_data["message"];

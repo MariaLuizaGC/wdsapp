@@ -29,6 +29,7 @@ class functions extends connect{
 	}
 
 	function select_box_uf($uf = ""){
+		$return = '';
 		$conn = new connect();
 
 		$sql = "SELECT * FROM uf order by uf_id";
@@ -96,11 +97,14 @@ class functions extends connect{
 				if($salt){
 					$passwordHashed = hash('sha256',md5($salt["hash"] . $password));
 	
-					if($passwordHashed == $result["senha"]){						
+					if($passwordHashed == $result["senha"]){
+						
+						$rsExec = functions::setLog($result["id"], "Login", $_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"]);
+
 						$return = [
 							"return" => true,
 							"data" => $result
-						];	
+						];
 					}else{
 
 						$login_attempts = $result["login_attempts"];
@@ -108,6 +112,7 @@ class functions extends connect{
 
 						if($login_attempts >= 5){
 							$time_block = time() + 180;
+							$rsExec = functions::setLog($result["id"], "Usuário bloqueado", $_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"]);
 						}
 
 						$return = [
@@ -136,6 +141,8 @@ class functions extends connect{
 						"message" => "E-mail ou senha incorretos."
 					];
 		}
+
+		// print_r($return);
 
 		return $return;
 	}
@@ -220,6 +227,7 @@ class functions extends connect{
 
 	function selectLevels($id = null){
 
+		$return = '';
 		$levels = array(
 			0=>array("id"=>"1","level"=>"Administrador"),
 			1=>array("id"=>"2" ,"level"=>"Colaborador")
@@ -245,6 +253,7 @@ class functions extends connect{
 	}
 
 	function selectClient($id = null){
+		$return = '';
 		$conn = new connect();
 
 		$qry = "SELECT * FROM clients order by nome";
@@ -277,6 +286,7 @@ class functions extends connect{
 	}
 
 	function selectSeller($id = null){
+		$return = '';
 		$conn = new connect();
 
 		$qry = "SELECT * FROM users order by user";
@@ -309,6 +319,7 @@ class functions extends connect{
 	}
 
 	function selectProducts($id = null){
+		$return = '';
 		$conn = new connect();
 
 		$qry = "SELECT * FROM products order by produto";
@@ -1062,4 +1073,13 @@ class functions extends connect{
         return json_encode($return, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
 
     }
+
+	function setLog($user_id, $description, $host){
+		$date_atual = date("Y-m-d h:i:s");
+		$ip = $_SERVER['REMOTE_ADDR'];
+		$qry = "INSERT INTO logs (date, user_id, description, host, ip) VALUES ('".$date_atual."','".$user_id."','".$description."','".$host."','".$ip."')";
+		$model = new model();
+		$model->model_exec($qry);
+		return true;
+	}
 }
