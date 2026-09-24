@@ -50,7 +50,11 @@ $session->setSession('pagina','orders');
         $status = $rs["status"];
         $obs = $rs["observacoes"];
 
-
+        if($userLevel["id"] != 1){
+            if($vendedor_id != $_SESSION["id_user_WDSApp_session"]){
+                header("location:"._HOST_."pedidos");
+            }
+        }
     }
 
 
