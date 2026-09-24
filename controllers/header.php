@@ -10,6 +10,7 @@ if($_SESSION["pagina"] != 'user-pass' && $_SESSION["pagina"] != '404' ){
 	if(!isset($_SESSION["id_user_WDSApp_session"])){
 		if ($_SESSION["pagina"] != 'login'){
 			header("location:"._HOST_."login");
+            exit();
 		}
 	}
 
@@ -24,6 +25,7 @@ if($userLevel["id"] != 1 && (
     || $_SESSION["pagina"] == 'produto_edit'
 )){ 
   header("Location:" . _HOST_);
+  exit();
 }
 
 $meta_tags = '

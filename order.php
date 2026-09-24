@@ -25,6 +25,7 @@ $session->setSession('pagina','orders');
 
     if(!$_GET["item"]){
         header("location:"._HOST_);
+        exit();
     }else{
 
 
@@ -32,7 +33,8 @@ $session->setSession('pagina','orders');
 
 
         if(!$rs){
-             header("location:"._HOST_."pedidos");
+            header("location:"._HOST_."pedidos");
+            exit();
         }
         $id = $rs["id"];
         $data = $rs["data"];
@@ -53,6 +55,7 @@ $session->setSession('pagina','orders');
         if($userLevel["id"] != 1){
             if($vendedor_id != $_SESSION["id_user_WDSApp_session"]){
                 header("location:"._HOST_."pedidos");
+                exit();
             }
         }
     }

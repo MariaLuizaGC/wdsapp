@@ -24,6 +24,7 @@ $session->setSession('pagina','produto_edit');
 
 	if(!$_GET["item"]){
         header("location:"._HOST_);
+		exit();
 	}else{
 		
 		$getItem = $_GET["item"];
@@ -46,7 +47,8 @@ $session->setSession('pagina','produto_edit');
 		$rs =  $conn->fetch_array($query);
 
 		if(!$rs){
-			 header("location:"._HOST_."produtos");
+			header("location:"._HOST_."produtos");
+			exit();
 		}
 		$id = $rs["id"];
 		$produto = $rs["produto"];

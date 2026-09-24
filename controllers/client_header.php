@@ -11,6 +11,7 @@ if($_SESSION["pagina"] != 'client-pass' && $_SESSION["pagina"] != '404' ){
 	if(!isset($_SESSION["id_client_WDSApp_session"])){
 		if ($_SESSION["pagina"] != 'client-login'){
             header("location:"._HOST_."acesso");
+			exit();
 		}
 	}
 }

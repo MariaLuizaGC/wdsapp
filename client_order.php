@@ -25,6 +25,7 @@ $session->setSession('pagina','painel');
 
     if(!$_GET["item"]){
         header("location:"._HOST_);
+        exit();
     }else{
 
         $getItem = $_GET["item"];
@@ -34,7 +35,8 @@ $session->setSession('pagina','painel');
         $rs = $functions->search("orders","id",$id);
 
         if(!$rs){
-             header("location:"._HOST_."painel");
+            header("location:"._HOST_."painel");
+            exit();
         }
         $data = $rs["data"];
         $stt_dataPed = strtotime($data);

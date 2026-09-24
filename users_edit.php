@@ -22,6 +22,7 @@ $session->setSession('pagina','usuario');
 
 	if(!$_GET["item"]){
 	    header("location:"._HOST_."usuarios");
+		exit();
 	}else{
 		
 		$getItem = $_GET["item"];
@@ -44,7 +45,8 @@ $session->setSession('pagina','usuario');
 		$rs =  $conn->fetch_array($query);
 
 		if(!$rs){
-			 header("location:"._HOST_."usuarios");
+			header("location:"._HOST_."usuarios");
+			exit();
 		}
 		$id = $rs["id"];
 		$nome = $rs["user"];

@@ -112,6 +112,7 @@ $session->setSession('pagina','api');
                               $log .= "\n";
                               file_put_contents("log/" . $datetime_log . ".txt", $log, FILE_APPEND);
                               header("Location: " . $_GET["next"]);
+                              exit();
                           }
                           ?>
                             <h4 class="font-weight-bold">Documentação WDS APP 1.0</h4>
