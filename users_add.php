@@ -6,7 +6,7 @@ include_once 'config/app.php';
 $session = new session_control();
 $functions = new functions();
 
-$session->setSession('pagina','usuarios');
+$session->setSession('pagina','usuario');
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

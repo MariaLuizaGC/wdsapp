@@ -6,7 +6,7 @@ include_once 'config/app.php';
 $session = new session_control();
 $functions = new functions();
 
-$session->setSession('pagina','index');
+$session->setSession('pagina','produto_edit');
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

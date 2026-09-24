@@ -17,6 +17,15 @@ if($_SESSION["pagina"] != 'user-pass' && $_SESSION["pagina"] != '404' ){
 
 $userLevel = $functions->getUserLevel();
 
+if($userLevel["id"] != 1 && (
+    $_SESSION["pagina"] == 'usuarios'
+    || $_SESSION["pagina"] == 'usuario'
+    || $_SESSION["pagina"] == 'produto_novo'
+    || $_SESSION["pagina"] == 'produto_edit'
+)){ 
+  header("Location:" . _HOST_);
+}
+
 $meta_tags = '
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

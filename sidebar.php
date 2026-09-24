@@ -40,7 +40,7 @@ if(isset($_SESSION["id_user_WDSApp_session"])){
        $menu = '
         <ul class="nav nav-pills nav-sidebar flex-column nav-legacy" data-widget="treeview" role="menu" data-accordion="false">
 		 ';
-		  if($_SESSION["pagina"]=="index"){$active = 'active';}else{$active = '';}
+		  if($_SESSION["pagina"]=="index" || $_SESSION["pagina"]=="produto_novo" || $_SESSION["pagina"]=="produto_edit"){$active = 'active';}else{$active = '';}
 		  $menu .= '
           <li class="nav-item">
             <a href="./" class="nav-link '.$active.'">
@@ -89,7 +89,7 @@ if(isset($_SESSION["id_user_WDSApp_session"])){
 		 
 											 
 		  if($userLevel["id"] == 1){ 
-			  if($_SESSION["pagina"]=="usuarios"){$active = 'active';}else{$active = '';}
+			  if($_SESSION["pagina"]=="usuarios" || $_SESSION["pagina"]=="usuario"){$active = 'active';}else{$active = '';}
 			  $menu .= '
 			  <li class="nav-item">
 				<a href="usuarios" class="nav-link '.$active.'">
