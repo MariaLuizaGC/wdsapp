@@ -260,7 +260,7 @@ $session->setSession('pagina','orders');
                     <input type="hidden" class="field_confirm" id="field_order_seller" value="">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" data-dismiss="modal" class="btn btn-warning" id="confirm_faturamento" onclick="faturarPedido('<?= base64_encode($_SESSION["id_user_WDSApp_session"]) ?>', $('#field_confirm_faturamento').val(),$('#field_order_seller').val())">Confirmar</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-warning" id="confirm_faturamento" onclick="faturarPedido('<?= hash('sha256',base64_encode($_SESSION["id_user_WDSApp_session"])) ?>', $('#field_confirm_faturamento').val(),$('#field_order_seller').val())">Confirmar</button>
                     <button type="button" data-dismiss="modal" class="btn btn-danger">Cancelar</button>
                 </div>
             </div>
@@ -422,12 +422,12 @@ $session->setSession('pagina','orders');
         $("#vendedor").change(function(){
             let pedido ='<?= $id ?>';
             //console.log($(this).val());
-            let auth_token = '<?= base64_encode($_SESSION["id_user_WDSApp_session"]) ?>';
+            let auth_token = '<?= hash('sha256',base64_encode($_SESSION["id_user_WDSApp_session"])) ?>';
             updateSellerOrder(auth_token, pedido, $(this).val());
         });
         $("#btn_act_edit_obs").click(function(){
             let pedido ='<?= $id ?>';
-            let auth_token = '<?= base64_encode($_SESSION["id_user_WDSApp_session"]) ?>';
+            let auth_token = '<?= hash('sha256',base64_encode($_SESSION["id_user_WDSApp_session"])) ?>';
             updateObsOrder(auth_token, pedido, $('#obs').val());
         });
 

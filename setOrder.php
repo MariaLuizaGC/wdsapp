@@ -9,10 +9,7 @@ $session = new session_control();
 $functions = new functions();
 $model = new model();
 
-$auth_token = "";
-if($_POST["auth_token"]){$auth_token = base64_decode($_POST["auth_token"]);}
-$checkAuthToken = $functions->search("users","id",$auth_token);
-if(!$checkAuthToken){
+if(!isset($_SESSION["id_user_WDSApp_session"])){
     $errMsg = "Ocorreu um erro durante o cadastro. Contacte o Administrador";
     echo $errMsg;
     exit();
