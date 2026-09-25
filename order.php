@@ -25,40 +25,38 @@ $session->setSession('pagina','orders');
 
     if(!$_GET["item"]){
         header("location:"._HOST_);
+    }
+
+    $rs = $functions->search("orders","id",$_GET["item"]);
+
+
+    if(!$rs){
+        header("location:"._HOST_."pedidos");
         exit();
-    }else{
+    }
+    $id = $rs["id"];
+    $data = $rs["data"];
+    $stt_dataPed = strtotime($data);
+    $codigo = $rs["id"];
+    $cliente_id = $rs["client_id"];
+    $cliente = $functions->search("clients","id",$cliente_id);
+    $cliente_nome = $cliente["nome"]. " ".$cliente["sobrenome"];
 
+    $valor = $rs["valor"];
+    $vendedor_id = $rs["seller_id"];
+    $vendedor = $functions->search("users","id",$vendedor_id);
+    $vendedor_nome = $vendedor["user"];
 
-        $rs = $functions->search("orders","id",$_REQUEST["item"]);
+    $status = $rs["status"];
+    $obs = $rs["observacoes"];
 
-
-        if(!$rs){
+    if($userLevel["id"] != 1){
+        if($vendedor_id != $_SESSION["id_user_WDSApp_session"]){
             header("location:"._HOST_."pedidos");
             exit();
         }
-        $id = $rs["id"];
-        $data = $rs["data"];
-        $stt_dataPed = strtotime($data);
-        $codigo = $rs["id"];
-        $cliente_id = $rs["client_id"];
-        $cliente = $functions->search("clients","id",$cliente_id);
-        $cliente_nome = $cliente["nome"]. " ".$cliente["sobrenome"];
-
-        $valor = $rs["valor"];
-        $vendedor_id = $rs["seller_id"];
-        $vendedor = $functions->search("users","id",$vendedor_id);
-        $vendedor_nome = $vendedor["user"];
-
-        $status = $rs["status"];
-        $obs = $rs["observacoes"];
-
-        if($userLevel["id"] != 1){
-            if($vendedor_id != $_SESSION["id_user_WDSApp_session"]){
-                header("location:"._HOST_."pedidos");
-                exit();
-            }
-        }
     }
+    
 
 
   ?>
