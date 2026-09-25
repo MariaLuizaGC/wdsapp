@@ -97,7 +97,22 @@ $session->setSession('pagina','orders');
 
                 $conn = new connect();
                 $getStatus = "";
-                if(isset($_GET["status"]))$getStatus = $_GET["status"];
+                if(isset($_GET["status"]))
+                {
+                  switch($_GET["status"]){
+                    case "Aberto":
+                      $getStatus = 'Aberto';
+                      break;
+                    case "Faturado":
+                      $getStatus = 'Faturado';
+                      break;
+                    case "Cancelado":                      
+                      $getStatus = 'Cancelado';
+                      break;
+                    default:
+                      $getStatus = '';
+                  }                  
+                }
 
                 $rsOrders = $functions->getOrders($seller, $getStatus);
 

@@ -680,7 +680,7 @@ class functions extends connect{
 
 	function getOrders($seller = "", $status = ""){
 		$conn = new connect();
-
+		$array_data = [];
         $qry = "SELECT * FROM orders ";
 
         if($status || $seller){
@@ -688,15 +688,17 @@ class functions extends connect{
         }
 
         if($status){
-            $qry .= " status = '".$status."'";
+            $qry .= " status = ':status'";
+			$array_data[':status'] = $status;
         }
 
 		if($seller){
             if($status)$qry .= " and ";
-			$qry .= " seller_id = ".$seller;
+			$qry .= " seller_id = :seller_id";
+			$array_data[':seller_id'] = $seller;
 		}
 
-		$query = $conn->query($qry);
+		$query = $conn->query($qry, $array_data);
         return $conn->fetch_all($query);
 
 	}
