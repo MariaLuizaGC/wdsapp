@@ -6,6 +6,12 @@ include_once 'config/app.php';
 $model = new model();
 $functions = new functions();
 
+if(!isset($_SESSION["id_user_WDSApp_session"])){
+    $errMsg = "Ocorreu um erro durante o cadastro. Contacte o Administrador";
+    echo $errMsg;
+    exit();
+}
+
 $emailpost = $_POST["email"];
 $rsUser = $functions->search("clients","email",$emailpost);
 

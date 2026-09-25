@@ -9,6 +9,18 @@ $session = new session_control();
 $functions = new functions();
 $model = new model();
 
+if(!isset($_SESSION["id_user_WDSApp_session"])){
+    $errMsg = "Ocorreu um erro durante o cadastro. Contacte o Administrador";
+    echo $errMsg;
+    exit();
+}
+
+if($userLevel["id"] != 1){
+    $errMsg = "Você não tem permissão para acessar este recurso";
+    echo $errMsg;
+    exit();
+}
+
 $act = "";
 $id = "";
 $nome = "";
