@@ -29,13 +29,28 @@ if($errMsg){
     $src = "files/";
     $name = $_FILES['file']['name'];
     $temp = $_FILES['file']['tmp_name'];
-    if(move_uploaded_file($temp, $src.$name)) {
-        //echo 1;
-    } else {
-        $errMsg = "Erro, não foi possível fazer a importação ";
+
+    $allowedTypes = array('xml', 'XML');
+    $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
+    if(in_array($ext, $allowedTypes)){
+
+        $name = uniqid() . '.' . $ext;
+
+        if(move_uploaded_file($temp, $src.$name)) {
+            //echo 1;
+        } else {
+            $errMsg = "Erro, não foi possível fazer a importação ";
+            echo $errMsg;
+            exit();
+        }     
+    }
+    else
+    {
+        $errMsg = "Erro. Apenas arquivos XML são permitidos.";
         echo $errMsg;
         exit();
     }
+
 
     $xml_data = simplexml_load_file($src.$name,"SimpleXMLElement",LIBXML_DTDVALID);
 
