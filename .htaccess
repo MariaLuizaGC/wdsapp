@@ -36,7 +36,6 @@ RewriteRule ^pedidos/(.*)\/?$  orders.php?status=$1 [NC,L]
 RewriteRule ^pedido/novo\/?$  order_new.php [NC,L]
 RewriteRule ^pedido\/?$  orders.php [NC,L]
 RewriteRule ^pedido/(.*)\/?$  order.php?item=$1 [NC,L]
-RewriteRule ^pedido/(.*)\/?$  order.php?item=$1   [NC,L]
 
 RewriteRule ^comissoes\/?$  sellers_fee.php [NC,L]
 
