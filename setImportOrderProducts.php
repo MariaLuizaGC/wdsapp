@@ -51,8 +51,9 @@ if($errMsg){
         exit();
     }
 
+    libxml_disable_entity_loader(true);
 
-    $xml_data = simplexml_load_file($src.$name,"SimpleXMLElement",LIBXML_DTDVALID);
+    $xml_data = simplexml_load_file($src.$name,"SimpleXMLElement",LIBXML_NOENT);
 
     if($xml_data) {
 
