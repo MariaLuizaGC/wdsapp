@@ -97,11 +97,11 @@ $(function() {
 
             </div>
             <div class="w-100 clr h20"></div>
-            <!--
+            
            <div class="col-12 text-center p-1" style="font-size:12px">
-                Já é um cliente? <a href="<?=_HOST_ ?>?page=client_login.php" class="text-dark font-weight-bold">Acesse o Painel do Cliente</a>
+                Já é um cliente? <a href="<?=_HOST_ ?>?page=area_cliente" class="text-dark font-weight-bold">Acesse o Painel do Cliente</a>
            </div>
-           -->
+           
 
         </div>
     </div>

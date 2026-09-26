@@ -8,9 +8,16 @@ $functions = new functions();
 
 $session->setSession('pagina','index');
 
-if($_GET["page"]){
-    include_once $_GET["page"];
-    exit;
+$page = $_GET["page"];
+
+if($page){
+	switch($page){
+		case "area_cliente":
+			header("location: "._HOST_."acesso");
+			// include_once "client_login.php";
+			exit;
+		break;
+	}
 }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
