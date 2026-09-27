@@ -64,8 +64,8 @@ $session->setSession('pagina','api');
                                         <label for="filter">Dados da Consulta</label>
                                         <select class="form-control" id="filter">
                                             <option value="" selected>Selecione uma opção</option>
-                                            <option value="orders" >Pedidos</option>
-                                            <option value="sellers_fee" >Comissões</option>
+                                            <option value="pedidos" >Pedidos</option>
+                                            <option value="comissoes" >Comissões</option>
                                         </select>
                                     </div>
                                 </div>
@@ -207,6 +207,7 @@ $session->setSession('pagina','api');
 
         $("#filter").change(function(){
             let filter = $(this).val();
+            console.log(filter);
             let data = viewApi(filter);
         });
 

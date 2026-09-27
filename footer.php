@@ -6,11 +6,11 @@
             <strong>Copyright &copy; <?php echo date("Y"); ?> <span class="text-info">WDS App</span>.</strong>
             Todos os Direitos Reservados.
         </div>
-        <!--
+        
         <div class="flex-fill text-right p-1" style="font-size:12px">
             <a href="view_api.php" class="text-dark">Consulta API</a>
         </div>
-        -->
+    
     </div>
 </footer>
 
