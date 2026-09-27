@@ -35,7 +35,7 @@ $session->setSession('pagina','api');
 			<h1 class="m-0 text-dark bold f30">API</h1>
 		</div>
         <div class="flex p-2 text-right ">
-          <a href="view_api.php?logs=log/" class="btn btn-sm btn-outline-dark"><span class="btn-label">Logs API<span class="cinza">&nbsp;&nbsp;|&nbsp;&nbsp;</span></span><i class="nav-icon fas fa-history f12"></i></a>
+          <a href="view_api.php?logs=all" class="btn btn-sm btn-outline-dark"><span class="btn-label">Logs API<span class="cinza">&nbsp;&nbsp;|&nbsp;&nbsp;</span></span><i class="nav-icon fas fa-history f12"></i></a>
         </div>
           <div class="flex p-2 text-right ">
               <a href="view_api.php?doc=doc/" class="btn btn-sm btn-outline-dark"><span class="btn-label">Doc<span class="cinza">&nbsp;&nbsp;|&nbsp;&nbsp;</span></span><i class="nav-icon far fa-file f12"></i></a>
@@ -84,8 +84,8 @@ $session->setSession('pagina','api');
 			<div class="row">
 			  <div class="col-12 px-4 pb-4" id="content_api">
                   <?php
-                      if($_GET["logs"]){
-                          $path = $_GET["logs"];
+                      if($_GET["logs"] == "all"){
+                          $path = "log/";
                           $diretorio = dir($path);
                           echo "<strong>Logs Report:</strong><br /><br />";
                           while($arquivo = $diretorio -> read()){
