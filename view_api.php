@@ -90,7 +90,7 @@ $session->setSession('pagina','api');
                           echo "<strong>Logs Report:</strong><br /><br />";
                           while($arquivo = $diretorio -> read()){
                               if(strlen($arquivo) > 4){
-                                  $data_log = base64_encode(json_encode(["logfile"=>$path.$arquivo]));
+                                  $data_log = base64_encode($arquivo);
                                   echo "
                                       <div class='col-12 px-0 py-1'>
                                           <a href='view_api.php?log=".$arquivo."'>".$arquivo."</a>&nbsp;
@@ -204,6 +204,7 @@ $session->setSession('pagina','api');
 		</section>
   	</div>
   </div>
+  
 
 <?php include('footer.php'); ?>
 

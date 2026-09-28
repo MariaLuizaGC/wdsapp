@@ -7,16 +7,21 @@ $session = new session_control();
 $functions = new functions();
 
 if($_POST["log"]){
-    $file = json_decode(base64_decode($_POST["log"]));
-    $exc = system("rm ".$file->logfile);
-    if(!$exc){
+    $file = base64_decode($_POST["log"]);
+    $file = preg_replace("/[^0-9\.txt]/", "", $file);
+    $logfile = "log/" . $file;
+
+    if(strlen($file) == 12 && file_exists($logfile)){
+        unlink($logfile);
         echo "Log Removido";
-    }else{
-        echo $exc;
+
+        $datetime = date("Y-m-d H:i:s");
+        $datetime_log = date("Ymd");
+        $log = $datetime." - Log Removed - ".$file;
+        $log .= "\n";
+        file_put_contents("log/" . $datetime_log . ".txt", $log, FILE_APPEND);
     }
-    $datetime = date("Y-m-d H:i:s");
-    $datetime_log = date("Ymd");
-    $log = $datetime." - Log Removed - ".$file->logfile;
-    $log .= "\n";
-    file_put_contents("log/" . $datetime_log . ".txt", $log, FILE_APPEND);
+    else{
+        echo "Arquivo de log não encontrado";
+    }
 }
