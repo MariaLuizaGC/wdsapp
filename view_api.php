@@ -93,7 +93,7 @@ $session->setSession('pagina','api');
                                   $data_log = base64_encode(json_encode(["logfile"=>$path.$arquivo]));
                                   echo "
                                       <div class='col-12 px-0 py-1'>
-                                          <a href='view_api.php?log=".$path.$arquivo."'>".$arquivo."</a>&nbsp;
+                                          <a href='view_api.php?log=".$arquivo."'>".$arquivo."</a>&nbsp;
                                           <a class='btRemoveLog bt text-danger f10' data-log='".$data_log."'><i class='fas fa-trash'></i></a>
                                       </div>
                                   ";
@@ -101,9 +101,16 @@ $session->setSession('pagina','api');
                           }
                           $diretorio -> close();
                       } elseif($_GET["log"]){
-                              $file = $_GET["log"];
-                              echo "Log File '<strong>".$file."</strong>':<br /><br />";
-                              echo str_replace("\n", "<br>",htmlentities(file_get_contents($file)));
+                              $file = preg_replace("/[^0-9\.txt]/", "", $_GET["log"]);
+                              $logfile = "log/" . $file;
+
+                              if(strlen($file) == 12 && file_exists($logfile)){
+                                echo "Log File '<strong>".htmlentities($file)."</strong>':<br /><br />";
+                                echo str_replace("\n", "<br>",htmlentities(file_get_contents($logfile)));
+                              }
+                              else{
+                                  echo "Arquivo de log não encontrado";
+                              }
                       } elseif($_GET["doc"]){
                           if($_GET["next"]) {
                               $datetime = date("Y-m-d H:i:s");
