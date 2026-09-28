@@ -112,15 +112,26 @@ $session->setSession('pagina','api');
                                   echo "Arquivo de log não encontrado";
                               }
                       } elseif($_GET["doc"]){
-                          if($_GET["next"]) {
-                              $datetime = date("Y-m-d H:i:s");
-                              $datetime_log = date("Ymd");
-                              $log = $datetime . " - Documentation - " . $_GET["next"];
-                              $log .= "\n";
-                              file_put_contents("log/" . $datetime_log . ".txt", $log, FILE_APPEND);
-                              header("Location: " . $_GET["next"]);
-                              exit();
-                          }
+                            if($_GET["next"]) {
+                                
+                                $nextHost = $_GET["next"];
+                                $validHosts = [
+                                    'localhost',
+                                ];
+                                if(in_array(
+                                   parse_url($nestHost, PHP_URL_HOST),
+                                   $validHosts,
+                                   true
+                                )) {
+                                    header("Location: " . $nextHost);
+                                    
+                                    $datetime = date("Y-m-d H:i:s");
+                                    $datetime_log = date("Ymd");
+                                    $log = $datetime . " - Documentation - " . $_GET["next"];
+                                    $log .= "\n";
+                                    file_put_contents("log/" . $datetime_log . ".txt", $log, FILE_APPEND);
+                                }
+                            }
                           ?>
                             <h4 class="font-weight-bold">Documentação WDS APP 1.0</h4>
                             <p>Sistema de uso exclusivo, dedicado ao gerenciamento de pedidos de venda com recursos para geração de comissionamento para vendedores.</p>
