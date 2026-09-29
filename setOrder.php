@@ -21,6 +21,8 @@ $vendedor = "";
 $obs = "";
 $act = "";
 
+$data_array = [];
+
 if($_POST["act"]){$act = $_POST["act"];}
 if($_POST["id"]){$id = $_POST["id"];}
 if($_POST["cliente"]){$cliente = $_POST["cliente"];}
@@ -47,6 +49,13 @@ if($errMsg){
 
 	if($act == 'new'){
 
+		$data_array = [
+			":data" 	 => $data,
+			":client_id" => $cliente,
+			":seller_id" => $vendedor,
+			":status" 	 => "Aberto",
+		];
+
 		$qry = '
 			insert into orders (
             data,
@@ -56,13 +65,13 @@ if($errMsg){
 			)';
 		$qry .= '
 			VALUES (
-			"'.$data.'",
-			"'.$cliente.'",
-			"'.$vendedor.'",
-			"Aberto"';
+			:data,
+			:client_id,
+			:seller_id,
+			:status';
 		$qry .= ')';
 		
-		$exec = $model->model_exec($qry);
+		$exec = $model->model_exec($qry, $data_array);
 		
 		if(!$exec){
 			$errMsg = "Ocorreu um erro durante o cadastro. Contacte o Administrador";
@@ -74,13 +83,22 @@ if($errMsg){
 		
 	}else if($act == 'edit'){
 
+		$data_array = [
+			":seller_id" => $vendedor,
+			":id" 	 	 => $id,
+		];
         if($vendedor) {
-            $qry = 'update orders SET seller_id = "' . $vendedor . '" WHERE id = ' . $id;
+            $qry = 'update orders SET seller_id = :seller_id WHERE id = :id';
         }else{
-            $qry = 'update orders SET observacoes = "'.$obs.'" WHERE id = '.$id;
+			$data_array = [
+				":observacoes" => $obs,
+				":id" 	 	   => $id,
+			];
+
+            $qry = 'update orders SET observacoes = :observacoes WHERE id = :id';
         }
 
-        $exec = $model->model_exec($qry);
+        $exec = $model->model_exec($qry, $data_array);
 
 		if(!$exec){
 			$errMsg = "Ocorreu um erro durante a atualização do cadastro. Contacte o Administrador";
@@ -90,9 +108,13 @@ if($errMsg){
             $return = 1;
         }
     }else if($act == 'faturar'){
+		$data_array = [
+			":status" => "Faturado",
+			":id" 	  => $id,
+		];
 
-        $qry = 'update orders SET status = "Faturado" WHERE id = '.$id;
-        $exec = $model->model_exec($qry);
+        $qry = 'update orders SET status = :status WHERE id = :id';
+        $exec = $model->model_exec($qry, $data_array);
 
         if(!$exec){
             $errMsg = "Ocorreu um erro durante a atualização do cadastro. Contacte o Administrador";
@@ -104,6 +126,15 @@ if($errMsg){
             $seller_data = $functions->search('users','id',$vendedor);
 
             $seller_fee = ($order_data["valor"]*$seller_data["fee_percent"])/100;
+
+			$data_array = [
+				":seller_id" => $vendedor,
+				":client_id" => $order_data["client_id"],
+				":order_id"  => $id,
+				":data" 	 => $data,
+				":valor" 	 => $seller_fee,
+			];
+			
             $qry = '
 			insert into sellers_fee (
                 seller_id,
@@ -114,21 +145,25 @@ if($errMsg){
 			)';
             $qry .= '
 			VALUES (
-			"'.$vendedor.'",
-			"'.$order_data["client_id"].'",
-			"'.$id.'",
-			"'.$data.'",
-			"'.$seller_fee.'"
+			:seller_id,
+			:client_id,
+			:order_id,
+			:data,
+			:valor
 			)';
 
-            $exec = $model->model_exec($qry);
+            $exec = $model->model_exec($qry, $data_array);
 
             $return = 1;
         }
 	}else if($act == 'del'){
+		$data_array = [
+			":status" => "Cancelado",
+			":id" 	  => $id,
+		];
 
-        $qry = 'update orders SET status = "Cancelado" WHERE id = '.$id;
-		$exec = $model->model_exec($qry);
+        $qry = 'update orders SET status = :status WHERE id = :id';
+		$exec = $model->model_exec($qry, $data_array);
         $return = 1;
 	}else{
         $errMsg = "Ocorreu um erro durante a atualização do cadastro. Contacte o Administrador";

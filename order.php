@@ -48,7 +48,7 @@ $session->setSession('pagina','orders');
     $vendedor_nome = $vendedor["user"];
 
     $status = $rs["status"];
-    $obs = $rs["observacoes"];
+    $obs = htmlentities($rs["observacoes"]);
 
     if($userLevel["id"] != 1){
         if($vendedor_id != $_SESSION["id_user_WDSApp_session"]){

@@ -7,10 +7,10 @@ class model extends connect{
 		//contrutor
 	}
 
-	function model_exec($query){
+	function model_exec($query, $params = null){
 		
 		$conn = new connect();
-		if ($rs = $conn->insertData($query)){
+		if ($rs = $conn->insertData($query, $params)){
 			return $rs;	
 		}else{
 			return false;

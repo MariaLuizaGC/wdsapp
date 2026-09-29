@@ -45,8 +45,15 @@ class connect extends config{
 
 	}
 	
-	function insertData($sql){
+	function insertData($sql, $params = null){
 		$stmt = $this->pdo->prepare($sql);
+
+		if($params){
+			foreach($params as $key => $value){
+				$stmt->bindValue($key, $value);
+			}
+		}
+
 		$run = $stmt->execute();
 		$lastID = $this->pdo->lastInsertId();
 		
