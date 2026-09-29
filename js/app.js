@@ -337,9 +337,8 @@ getConfirm = function(id){
 	$('#modal_confirm').modal('show');
 }
 
-getConfirmFaturamento = function(id, seller){
-	$('#field_confirm_faturamento').val(id);
-	$('#field_order_seller').val(seller);
+getConfirmFaturamento = function(id){
+	$('#field_confirm_faturamento').val(id);	
 	$('#modal_confirm_faturamento').on('shown.bs.modal', function () {
 		$('#confirm_faturamento').trigger('focus');
 	})
@@ -512,8 +511,8 @@ setOrderProduct = function(produto, qtde, pedido){
 	);
 }
 
-faturarPedido = function(auth_token, pedido, seller){
-	$.post("setOrder.php",{auth_token:auth_token, id:pedido, vendedor:seller, act:'faturar'},
+faturarPedido = function(auth_token, pedido){
+	$.post("setOrder.php",{auth_token:auth_token, id:pedido, act:'faturar'},
 	function(data){
 			if(data == 1){
 				location.reload();

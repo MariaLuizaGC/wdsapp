@@ -151,7 +151,7 @@ $session->setSession('pagina','orders');
                                                                 </select>
                                                               ';
                                                           }else{
-                                                              echo $vendedor_nome.'<input type="hidden"  id="vendedor" name="vendedor" value="'.$vendedor_id.'">';
+                                                              echo $vendedor_nome;
                                                           } ?>
                                                       </td>
                                                   </tr>
@@ -255,10 +255,9 @@ $session->setSession('pagina','orders');
                 <div class="modal-body">
                     É necessário confirmar esta operação.
                     <input type="hidden" class="field_confirm" id="field_confirm_faturamento" value="">
-                    <input type="hidden" class="field_confirm" id="field_order_seller" value="">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" data-dismiss="modal" class="btn btn-warning" id="confirm_faturamento" onclick="faturarPedido('<?= hash('sha256',base64_encode($_SESSION["id_user_WDSApp_session"])) ?>', $('#field_confirm_faturamento').val(),$('#field_order_seller').val())">Confirmar</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-warning" id="confirm_faturamento" onclick="faturarPedido('<?= hash('sha256',base64_encode($_SESSION["id_user_WDSApp_session"])) ?>', $('#field_confirm_faturamento').val())">Confirmar</button>
                     <button type="button" data-dismiss="modal" class="btn btn-danger">Cancelar</button>
                 </div>
             </div>
@@ -376,8 +375,7 @@ $session->setSession('pagina','orders');
 
         $("#btn_faturar_pedido").click(function(){
             let pedido ='<?= $id ?>';
-            let seller = $("#vendedor").val();
-            getConfirmFaturamento(pedido, seller);
+            getConfirmFaturamento(pedido);
         });
         $("#btn_act_add_produto").click(function(){
             let pedido = <?= $id ?>;

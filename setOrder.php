@@ -123,12 +123,12 @@ if($errMsg){
         }else{
 
             $order_data = $functions->search('orders','id',$id);
-            $seller_data = $functions->search('users','id',$vendedor);
+            $seller_data = $functions->search('users','id',$order_data["seller_id"]);
 
             $seller_fee = ($order_data["valor"]*$seller_data["fee_percent"])/100;
 
 			$data_array = [
-				":seller_id" => $vendedor,
+				":seller_id" => $order_data["seller_id"],
 				":client_id" => $order_data["client_id"],
 				":order_id"  => $id,
 				":data" 	 => $data,
