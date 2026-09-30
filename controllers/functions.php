@@ -644,6 +644,7 @@ class functions extends connect{
 
 
 				$id = $rs["id"];
+				$encryptID = functions::encrypt($id);
 				$produto = $rs["produto"];
 				$valor = $rs["valor"];
 				$options = "";
@@ -651,8 +652,8 @@ class functions extends connect{
 				if($userLevel == 1){
 					$options = '
 						<td class="text-right f12">
-							<a href="produto/edit/'.$id.'" style="padding: 2px" class="a-default"><i class="nav-icon far fa-edit"></i></a>&nbsp;
-							<a onclick="getConfirm(\''.$id.'\');" style="padding: 2px" class="a-danger bt"><i class="nav-icon far fa-trash-alt  text-danger"></i></a>&nbsp;
+							<a href="produto/edit/'.$encryptID.'" style="padding: 2px" class="a-default"><i class="nav-icon far fa-edit"></i></a>&nbsp;
+							<a onclick="getConfirm(\''.$encryptID.'\');" style="padding: 2px" class="a-danger bt"><i class="nav-icon far fa-trash-alt  text-danger"></i></a>&nbsp;
 						</td>
 					';
 				}

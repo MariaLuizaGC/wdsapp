@@ -30,6 +30,7 @@ $session->setSession('pagina','produto_edit');
 		$getItem = $_GET["item"];
 
 		$id = $getItem;
+		$decryptID = $functions->decrypt($getItem);
 
 		$conn = new connect();
 		
@@ -40,7 +41,7 @@ $session->setSession('pagina','produto_edit');
 		FROM
 			products
 		WHERE
-		  id = ".$id." 
+		  id = ".$decryptID." 
 		LIMIT 1";
 
 		$query = $conn->query($qry, $con);
