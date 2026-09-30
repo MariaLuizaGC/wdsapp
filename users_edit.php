@@ -28,6 +28,7 @@ $session->setSession('pagina','usuario');
 		$getItem = $_GET["item"];
 
 		$id = $getItem;
+		$decryptID = $functions->decrypt($getItem);
 
 		$conn = new connect();
 		
@@ -38,7 +39,7 @@ $session->setSession('pagina','usuario');
 		FROM
 			users
 		WHERE
-		  id = ".$id." 
+		  id = ".$decryptID." 
 		LIMIT 1";
 
 		$query = $conn->query($qry, $con);

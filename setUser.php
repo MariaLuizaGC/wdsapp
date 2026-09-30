@@ -30,7 +30,7 @@ $comissao = 0;
 
 if($_POST["act"]){$act = $_POST["act"];}
 
-if($_POST["id"]){$id = $_POST["id"];}
+if($_POST["id"]){$id = $functions->decrypt($_POST["id"]);}
 
 if($_POST["user"]){$nome = $_POST["user"];}
 if($_POST["email"]){$email = $_POST["email"];}
@@ -66,13 +66,9 @@ if($errMsg){
 			echo $errMsg;
 			exit();
 		}
-		
-		
-		
+				
 		$password = $functions->createPassword();
 		$password = hash('sha256', md5($password));
-
-		
 		
 		$qryUser = '
 			insert into users (

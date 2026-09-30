@@ -488,6 +488,7 @@ class functions extends connect{
 			while($rs = $conn->fetch_array($query)){
 
 				$id = $rs["id"];
+				$encryptID = functions::encrypt($id);
 				$nome = $rs["user"];
 				$email = $rs["email"];
 				$level = $rs["level"];
@@ -499,11 +500,11 @@ class functions extends connect{
 						  <td>'.functions::getLevel($level).'</td>
 						  
 						  <td class="text-right f12">
-							<a href="usuarios/edit/'.$id.'" data-password="'.$rs["senha"].'" style="padding: 2px" class="a-default"><i class="nav-icon far fa-edit"></i></a>&nbsp;
+							<a href="usuarios/edit/'.$encryptID.'" data-password="'.$rs["senha"].'" style="padding: 2px" class="a-default"><i class="nav-icon far fa-edit"></i></a>&nbsp;
 				';
 				if($_SESSION["id_user_WDSApp_session"]!=$id){
 					$return .= '
-							<a onclick="getConfirm(\''.$id.'\');" style="padding: 2px" class="a-danger bt"><i class="nav-icon far fa-trash-alt  text-danger"></i></a>&nbsp;
+							<a onclick="getConfirm(\''.$encryptID.'\');" style="padding: 2px" class="a-danger bt"><i class="nav-icon far fa-trash-alt  text-danger"></i></a>&nbsp;
 					';
 				}else{
 					$return .= '<i class="nav-icon far fa-trash-alt text-muted" style="padding: 2px"></i>&nbsp;';
