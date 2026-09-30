@@ -10,6 +10,7 @@ $session->setSession('pagina','orders');
 $decryptID = $functions->decrypt($_GET["item"]);
 $res = $functions->search("orders","id",$decryptID);
 
+$csrf = $functions->getCsrf();
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -379,10 +380,11 @@ $res = $functions->search("orders","id",$decryptID);
             getConfirmFaturamento(pedido);
         });
         $("#btn_act_add_produto").click(function(){
-            let pedido = <?= $id ?>;
+            let pedido = '<?= $id ?>';
             let produto = $("#produto").val();
             let qtde = $("#qtde").val();
-            setOrderProduct(produto, qtde, pedido);
+            let csrf = '<?= $csrf ?>';
+            setOrderProduct(produto, qtde, pedido, csrf);
         });
 
         $("#btn_act_importar_produtos").click(function(){

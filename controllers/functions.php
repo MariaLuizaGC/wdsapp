@@ -1106,4 +1106,10 @@ class functions extends connect{
 		$cipher = substr($data, 8);		
 		return openssl_decrypt(hex2bin($cipher), 'AES-256-CBC', $key, OPENSSL_RAW_DATA, $iv);
 	}
+
+	function getCsrf(){
+		$csrf = hash('sha256', functions::createPassword(16) );
+		$_SESSION['csrf_WDSApp_session'] = $csrf;
+		return $csrf;
+	}
 }

@@ -496,8 +496,8 @@ cancelOrder = function(id){
 }
 
 
-setOrderProduct = function(produto, qtde, pedido){
-	$.post("setOrderProduct.php",{produto:produto, qtde:qtde,pedido:pedido, act:'new'},
+setOrderProduct = function(produto, qtde, pedido, csrf){
+	$.post("setOrderProduct.php",{produto:produto, qtde:qtde,pedido:pedido, act:'new', csrf:csrf},
 		function(data){
 			if(data == 1){
 				location.reload();

@@ -9,6 +9,12 @@ $session = new session_control();
 $functions = new functions();
 $model = new model();
 
+if(!isset($_POST["csrf"]) || $_POST["csrf"] != $_SESSION["csrf_WDSApp_session"]){
+    $errMsg = "Ocorreu um erro. Atualize a página e tente novamente.";
+    echo $errMsg;
+    exit();
+}
+
 if(!isset($_SESSION["id_user_WDSApp_session"])){
     $errMsg = "Ocorreu um erro durante o cadastro. Contacte o Administrador";
     echo $errMsg;
@@ -120,9 +126,9 @@ if($errMsg){
 	
 	if($errMsg){
 		echo $errMsg;
-	}else{
-		
+	}else{		
 		echo 1;
+		$functions->getCsrf();
 	}
 	
 }
