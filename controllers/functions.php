@@ -1084,4 +1084,21 @@ class functions extends connect{
 		$model->model_exec($qry);
 		return true;
 	}
+
+	function encrypt($data)
+	{
+		$key = $_SESSION['key_user_WDSApp_session'];
+		$iv =  functions::createPassword(8,false);
+		$hex = bin2hex(openssl_encrypt($data, 'AES-256-CBC', $key, OPENSSL_RAW_DATA, $iv));
+		$return = $iv.$hex;
+		return $return;
+	}
+
+	function decrypt($data)
+	{
+		$key = $_SESSION['key_user_WDSApp_session'];
+		$iv = substr($data, 0, 8);
+		$cipher = substr($data, 8);		
+		return openssl_decrypt(hex2bin($cipher), 'AES-256-CBC', $key, OPENSSL_RAW_DATA, $iv);
+	}
 }

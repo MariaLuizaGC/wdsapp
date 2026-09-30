@@ -145,6 +145,8 @@ $session->setSession('pagina','orders');
 
                                 $data = $rs["data"];
                                 $codigo = $rs["id"];
+                                $encryptID = $functions->encrypt($rs["id"]);
+
                                 $cliente_id = $rs["client_id"];
                                 $cliente = $functions->search("clients","id",$cliente_id);
                                 $cliente_nome = $cliente["nome"]. " ".$cliente["sobrenome"];
@@ -165,8 +167,8 @@ $session->setSession('pagina','orders');
                                 $return .= '
                              <tr>
                                   <td>'.date("d/m/Y", strtotime($data)).'</td>
-                                  <td><a href="pedido/'.$codigo.'">'.$codigo.'</a></td>
-                                  <td><a href="pedido/'.$codigo.'">'.$cliente_nome.'</a></td>
+                                  <td><a href="pedido/'.$encryptID.'">'.$codigo.'</a></td>
+                                  <td><a href="pedido/'.$encryptID.'">'.$cliente_nome.'</a></td>
                                   <td>'.$valor.'</td>
                                    <td>'.$status.'</td>
                                   <td>'.$vendedor_nome.'</td>

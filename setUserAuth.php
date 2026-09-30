@@ -14,10 +14,12 @@ $session->setSession('user_WDSApp_session', $user);
 $user_data = $functions->authUser($user , $password);
 
 if($user_data["return"] == true){
+    
     $user_data = $user_data["data"];
-
     $session->setSession('id_user_WDSApp_session', $user_data["id"]);
     $session->setSession('nome_user_WDSApp_session', $user_data["user"]);
+    $session->setSession('key_user_WDSApp_session', bin2hex(openssl_random_pseudo_bytes(16)));
+
     date_default_timezone_set('America/Sao_Paulo');
     session_regenerate_id(true);
 

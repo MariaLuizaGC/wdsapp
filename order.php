@@ -7,7 +7,8 @@ $session = new session_control();
 $functions = new functions();
 
 $session->setSession('pagina','orders');
-
+$decryptID = $functions->decrypt($_GET["item"]);
+$res = $functions->search("orders","id",$decryptID);
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -27,7 +28,7 @@ $session->setSession('pagina','orders');
         header("location:"._HOST_);
     }
 
-    $rs = $functions->search("orders","id",$_GET["item"]);
+    $rs = $functions->search("orders","id",$decryptID);
 
 
     if(!$rs){
