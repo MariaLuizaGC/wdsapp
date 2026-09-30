@@ -31,7 +31,7 @@ $cep = "";
 $pais = "";
 
 if($_POST["act"]){$act = $_POST["act"];}
-if($_POST["id"]){$id = $_POST["id"];}
+if($_POST["id"]){$id = $functions->decrypt($_POST["id"]);}
 
 if($act == 'new' || $act == 'edit'){
 

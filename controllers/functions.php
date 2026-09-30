@@ -567,6 +567,7 @@ class functions extends connect{
 			while($rs = $conn->fetch_array($query)){
 
 				$id = $rs["id"];
+				$encryptID = functions::encrypt($id);
 				$nome = $rs["nome"]. " ".$rs["sobrenome"];
 				$email = $rs["email"];
 				$telefone = $rs["telefone"];
@@ -582,8 +583,8 @@ class functions extends connect{
 						  <td>'.$local.'</td>
 						  
 						  <td class="text-right f12">
-							<a href="cliente/edit/'.$id.'" style="padding: 2px" class="a-default"><i class="nav-icon far fa-edit"></i></a>&nbsp;
-						    <a onclick="getConfirm(\''.$id.'\');" style="padding: 2px" class="a-danger bt"><i class="nav-icon far fa-trash-alt  text-danger"></i></a>&nbsp;
+							<a href="cliente/edit/'.$encryptID.'" style="padding: 2px" class="a-default"><i class="nav-icon far fa-edit"></i></a>&nbsp;
+						    <a onclick="getConfirm(\''.$encryptID.'\');" style="padding: 2px" class="a-danger bt"><i class="nav-icon far fa-trash-alt  text-danger"></i></a>&nbsp;
 						  </td>
 					</tr>
 				';
