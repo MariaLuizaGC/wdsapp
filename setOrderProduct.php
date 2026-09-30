@@ -20,7 +20,7 @@ $pedido = "";
 $id = "";
 $act = "";
 
-if($_POST["produto"]){$produto = $_POST["produto"];}
+if($_POST["produto"]){$produto =  $functions->decrypt($_POST["produto"]);}
 if($_POST["qtde"]){$qtde = $_POST["qtde"];}
 if($_POST["pedido"]){$pedido = $_POST["pedido"];}
 if($_POST["id"]){$id = $_POST["id"];}

@@ -341,8 +341,10 @@ class functions extends connect{
 				$selected  = '';
 			}
 
+			$encryptID = functions::encrypt($rs["id"]);
 
-			$return .= '<option value="'.$rs["id"].'" class="pd10" '.$selected.' >'.$rs["produto"].'</option>';
+
+			$return .= '<option value="'.$encryptID.'" class="pd10" '.$selected.' >'.$rs["produto"].'</option>';
 
 			$x++;
 		}
