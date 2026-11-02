@@ -4,6 +4,10 @@ date_default_timezone_set('America/Sao_Paulo');
 error_reporting(0);
 class session_control{
 
+    function __construct(){
+		session_start();
+    }
+
     function session_control(){
 		
         $session_name = 'SEC_WDSAPP';
@@ -36,25 +40,25 @@ class session_control{
 
 	}
 
-	function __construct(){
-		session_start();
+	// function __construct(){
+	// 	session_start();
 
-		$_SESSION["session_time"] = 30;
+	// 	$_SESSION["session_time"] = 30;
 
-		if($_SESSION["log_session_time"]){
-			$session_time = time() - $_SESSION["log_session_time"];
-			if($session_time > $_SESSION["session_time"]){
-				session_destroy();
-			}
-			else{
-				$_SESSION["log_session_time"] = time();
-			}
-		}
-		else{
-			$_SESSION["log_session_time"] = time();
-		}
+	// 	if($_SESSION["log_session_time"]){
+	// 		$session_time = time() - $_SESSION["log_session_time"];
+	// 		if($session_time > $_SESSION["session_time"]){
+	// 			session_destroy();
+	// 		}
+	// 		else{
+	// 			$_SESSION["log_session_time"] = time();
+	// 		}
+	// 	}
+	// 	else{
+	// 		$_SESSION["log_session_time"] = time();
+	// 	}
 
-	}
+	// }
 
 	function setSession($vars,$val){
 		$_SESSION[$vars] = $val;
