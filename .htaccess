@@ -1,5 +1,7 @@
 <IfModule mod_rewrite.c>
 
+Options -Indexes
+
 RewriteEngine On
 RewriteBase /wdsapp/
 
@@ -39,4 +41,14 @@ RewriteRule ^pedido/(.*)\/?$  order.php?item=$1 [NC,L]
 
 RewriteRule ^comissoes\/?$  sellers_fee.php [NC,L]
 
+
+
+php_value max_execution_time 6000000
+php_value max_input_time 6000000
+
+
 </IfModule>
+
+<Files .htaccess>
+    Require all denied
+</Files>
